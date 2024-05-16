@@ -24,7 +24,7 @@ public class AlumnoData {
     
     public void guardarAlumno(Alumno alumno){
         
-        String sql = "INSERT INTO alumnos( dni, apellido, nombre, fechaNacimiento, estado) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO alumnos( dni, apellido, nombre, fecha_nacimiento, estado) VALUES (?,?,?,?,?)";
        
         
         try {
@@ -49,7 +49,7 @@ public class AlumnoData {
     }
     public Alumno buscarAlumno(int id){
         Alumno alumno = null;
-        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumnos WHERE id_Alumnos = ? AND estado = 1";
+        String sql = "SELECT dni, apellido, nombre, fecha_nacimiento FROM alumnos WHERE id_Alumnos = ? AND estado = 1";
         PreparedStatement ps = null;
         
         try {
@@ -63,7 +63,7 @@ public class AlumnoData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setFechaNac(rs.getDate("fecha_nacimiento").toLocalDate());
                 alumno.setEstado(true);
             }else{
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
@@ -77,7 +77,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumnoPorDni(int dni){
         Alumno alumno = null;
-        String sql = "SELECT id_alumnos, dni, apellido, nombre, fechaNacimiento FROM alumnos WHERE dni=? AND estado = 1";
+        String sql = "SELECT id_alumnos, dni, apellido, nombre, fecha_nacimiento FROM alumnos WHERE dni=? AND estado = 1";
         PreparedStatement ps = null;
         
         try {
@@ -87,11 +87,11 @@ public class AlumnoData {
             
             if(rs.next()){
                 alumno = new Alumno();
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setIdAlumno(rs.getInt("id_alumnos"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setFechaNac(rs.getDate("fecha_nacimiento").toLocalDate());
                 alumno.setEstado(true);
             }else{
                 JOptionPane.showMessageDialog(null, "No existe el alumno");    
@@ -104,7 +104,7 @@ public class AlumnoData {
     }
     public List<Alumno> listarAlumnos(){
     
-         String sql = "SELECT id_alumnos,dni,apellido,nombre,fechaNacimiento FROM alumnos WHERE estado=!";
+         String sql = "SELECT id_alumnos,dni,apellido,nombre,fecha_nacimiento FROM alumnos WHERE estado = 1";
          List<Alumno> alumnos= new ArrayList<>();
          
          try{
@@ -116,11 +116,11 @@ public class AlumnoData {
              while(rs.next()){
              
                  Alumno alumno = new Alumno();
-                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+                 alumno.setIdAlumno(rs.getInt("id_alumnos"));
                  alumno.setDni(rs.getInt("dni"));
-                 alumno.setApellido(rs.getString("idAlumno"));
-                 alumno.setNombre(rs.getString("idAlumno"));
-                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
+                 alumno.setApellido(rs.getString("apellido"));
+                 alumno.setNombre(rs.getString("nombre"));
+                 alumno.setFechaNac(rs.getDate("fecha_nacimiento").toLocalDate());
                  alumno.setEstado(true);
                     
                  alumnos.add(alumno);
@@ -134,7 +134,7 @@ public class AlumnoData {
     }
     
     public void modificarAlumno(Alumno alumno){
-        String sql = "UPDATE alumnos SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?"
+        String sql = "UPDATE alumnos SET dni = ?, apellido = ?, nombre = ?, fecha_nacimiento = ?"
                 + "WHERE id_alumnos = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
