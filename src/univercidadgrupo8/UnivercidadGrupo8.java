@@ -17,7 +17,7 @@ public class UnivercidadGrupo8 {
     public static void main(String[] args) {
         
         Connection con = Conexion.getConexion();
-        Alumno rosario = new Alumno(37829766, "Rosario María", "Perez", LocalDate.of(2000, 02, 15), true);
+        Alumno rosario = new Alumno(7,37829766, "María Rosario", "Perez", LocalDate.of(2000, 02, 15), true);
         AlumnoData ad = new AlumnoData();
         List<Alumno> lista = ad.listarAlumnos();
         
