@@ -13,7 +13,7 @@ public class UnivercidadGrupo8 {
         
         Connection con = Conexion.getConexion();
         
-        System.out.println("");
+        
     }
 
 }
