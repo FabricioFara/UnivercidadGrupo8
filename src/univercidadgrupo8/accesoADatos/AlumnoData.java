@@ -2,13 +2,7 @@
 package univercidadgrupo8.accesoADatos;
 
 
-import java.sql.Connection;
-import java.sql.Date;   
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import univercidadgrupo8.entidad.Alumno;
 
@@ -36,13 +30,17 @@ public class AlumnoData {
             ps.setString(3, alumno.getNombre());
             ps.setDate(4,  Date.valueOf(alumno.getFechaNac()));
             ps.setBoolean(5,alumno.isEstado());
+            ps.executeUpdate();
             
-            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                alumno.setIdAlumno(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Alumno Guardado");
+            }
+            ps.close();
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
         }
-    
-        
     
     }
     
