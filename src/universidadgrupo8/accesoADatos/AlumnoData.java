@@ -1,5 +1,5 @@
 
-package univercidadgrupo8.accesoADatos;
+package universidadgrupo8.accesoADatos;
 
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import univercidadgrupo8.entidad.Alumno;
+import universidadgrupo8.entidad.Alumno;
 
 
 

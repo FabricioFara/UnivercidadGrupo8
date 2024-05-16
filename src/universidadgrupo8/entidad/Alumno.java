@@ -1,5 +1,5 @@
 
-package univercidadgrupo8.entidad;
+package universidadgrupo8.entidad;
 
 import java.time.LocalDate;
 import java.util.Date;
