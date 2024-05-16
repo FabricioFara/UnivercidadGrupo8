@@ -12,6 +12,8 @@ public class UnivercidadGrupo8 {
     public static void main(String[] args) {
         
         Connection con = Conexion.getConexion();
+        
+        System.out.println("");
     }
 
 }
