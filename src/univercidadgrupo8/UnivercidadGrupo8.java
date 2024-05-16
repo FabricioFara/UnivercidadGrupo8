@@ -3,7 +3,7 @@
 package univercidadgrupo8;
 
 import java.sql.Connection;
-import univercidadgrupo8.accesoADatos.Conexion;
+import universidadgrupo8.accesoADatos.Conexion;
 
 
 public class UnivercidadGrupo8 {

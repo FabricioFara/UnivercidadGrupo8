@@ -1,5 +1,5 @@
 
-package univercidadgrupo8.entidad;
+package universidadgrupo8.entidad;
 
 
 public class Inscripcion {

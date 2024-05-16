@@ -1,10 +1,10 @@
 
-package univercidadgrupo8.accesoADatos;
+package universidadgrupo8.accesoADatos;
 
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import univercidadgrupo8.entidad.Alumno;
+import universidadgrupo8.entidad.Alumno;
 
 
 

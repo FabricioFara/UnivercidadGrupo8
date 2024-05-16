@@ -1,5 +1,5 @@
 
-package univercidadgrupo8.accesoADatos;
+package universidadgrupo8.accesoADatos;
 
 import java.sql.*;
 import java.util.logging.Level;
