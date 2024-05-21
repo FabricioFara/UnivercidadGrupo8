@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2024 a las 22:04:46
+-- Tiempo de generación: 21-05-2024 a las 16:36:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,6 +46,54 @@ INSERT INTO `alumnos` (`id_alumnos`, `dni`, `apellido`, `nombre`, `fecha_nacimie
 (6, 231231, 'fernandez', 'rocio', '2004-03-05', 0),
 (7, 37829766, 'Perez', 'María Rosario', '2000-02-15', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inscripciones`
+--
+
+CREATE TABLE `inscripciones` (
+  `id_inscripciones` int(11) NOT NULL,
+  `nota` int(11) NOT NULL,
+  `id_alumnos` int(11) NOT NULL,
+  `id_materia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inscripciones`
+--
+
+INSERT INTO `inscripciones` (`id_inscripciones`, `nota`, `id_alumnos`, `id_materia`) VALUES
+(1, 7, 4, 1),
+(2, 8, 4, 2),
+(3, 9, 5, 1),
+(4, 7, 5, 3),
+(5, 6, 6, 3),
+(6, 9, 6, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materia`
+--
+
+CREATE TABLE `materia` (
+  `id_materia` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `año` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`id_materia`, `nombre`, `año`, `estado`) VALUES
+(1, 'matematica', 2024, 1),
+(2, 'lengua', 2023, 1),
+(3, 'biologia', 2024, 1),
+(4, 'geografia', 2023, 1);
+
 --
 -- Índices para tablas volcadas
 --
@@ -58,6 +106,21 @@ ALTER TABLE `alumnos`
   ADD UNIQUE KEY `unico` (`dni`);
 
 --
+-- Indices de la tabla `inscripciones`
+--
+ALTER TABLE `inscripciones`
+  ADD PRIMARY KEY (`id_inscripciones`,`id_alumnos`,`id_materia`),
+  ADD KEY `id_alumno` (`id_alumnos`),
+  ADD KEY `id_materia` (`id_materia`);
+
+--
+-- Indices de la tabla `materia`
+--
+ALTER TABLE `materia`
+  ADD PRIMARY KEY (`id_materia`),
+  ADD UNIQUE KEY `materia` (`nombre`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -66,6 +129,29 @@ ALTER TABLE `alumnos`
 --
 ALTER TABLE `alumnos`
   MODIFY `id_alumnos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `inscripciones`
+--
+ALTER TABLE `inscripciones`
+  MODIFY `id_inscripciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `materia`
+--
+ALTER TABLE `materia`
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `inscripciones`
+--
+ALTER TABLE `inscripciones`
+  ADD CONSTRAINT `id_alumno` FOREIGN KEY (`id_alumnos`) REFERENCES `alumnos` (`id_alumnos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_materia` FOREIGN KEY (`id_materia`) REFERENCES `materia` (`id_materia`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
