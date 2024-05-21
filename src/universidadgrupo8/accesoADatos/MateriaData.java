@@ -108,8 +108,8 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia "+ex.getMessage());
         }   
-         return materias;
-    }
+         return materias;
+    }
      
      public void modificarMateria(Materia materia){
      
