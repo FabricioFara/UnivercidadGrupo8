@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import universidadgrupo8.accesoADatos.AlumnoData;
 import universidadgrupo8.accesoADatos.Conexion;
-import universidadgrupo8.accesoADatos.InscripcionesData;
+import universidadgrupo8.accesoADatos.InscripcionData;
 import universidadgrupo8.accesoADatos.MateriaData;
 import universidadgrupo8.entidad.Alumno;
 
@@ -36,7 +36,7 @@ public class UnivercidadGrupo8 {
         
         AlumnoData ad = new AlumnoData();
         MateriaData md= new MateriaData();
-        InscripcionesData id = new InscripcionesData();
+        InscripcionData id = new InscripcionData();
         
         
     }
