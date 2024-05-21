@@ -18,9 +18,8 @@
 *.zip
 *.tar.gz
 *.rar
-##############################
-## NetBeans
-##############################
+
+# NetBeans #
 nbproject/private/
 build/
 nbbuild/
