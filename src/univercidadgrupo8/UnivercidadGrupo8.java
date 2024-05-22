@@ -11,6 +11,8 @@ import universidadgrupo8.accesoADatos.Conexion;
 import universidadgrupo8.accesoADatos.InscripcionData;
 import universidadgrupo8.accesoADatos.MateriaData;
 import universidadgrupo8.entidad.Alumno;
+import universidadgrupo8.entidad.Inscripcion;
+import universidadgrupo8.entidad.Materia;
 
 
 public class UnivercidadGrupo8 {
@@ -23,21 +25,51 @@ public class UnivercidadGrupo8 {
         AlumnoData ad = new AlumnoData();
         List<Alumno> lista = ad.listarAlumnos();
         
-        ad.guardarAlumno(rosario);
-        System.out.println(ad.buscarAlumno(5));
-        System.out.println(ad.buscarAlumnoPorDni(349839));
-        ad.modificarAlumno(rosario);
-        System.out.println("Lista de alumnos:");
-        for (Alumno alumno : lista) {
-            System.out.println(alumno);
+//        ad.guardarAlumno(rosario);
+//        System.out.println(ad.buscarAlumno(5));
+//        System.out.println(ad.buscarAlumnoPorDni(349839));
+//        ad.modificarAlumno(rosario);
+//        System.out.println("Lista de alumnos:");
+//        for (Alumno alumno : lista) {
+//            System.out.println(alumno);
+//        }
+//        ad.eliminarAlumno(6);
+        
+        
+        MateriaData md= new MateriaData();
+        Materia ingles = new Materia("Inglés", 2024, true);
+        InscripcionData id = new InscripcionData();
+        
+//        System.out.println(md.buscarmateria(1));
+//        System.out.println("--------------------------------");
+       //md.guardarMateria(ingles);
+//        md.eliminarMateria(10);
+//        ingles = new Materia(10,"Inglés", 2023, false);
+//        md.modificarMateria(ingles);
+//        List<Materia> listaMaterias = md.listarMaterias();
+//        System.out.println("Lista materias:");
+//        for (Materia materia : listaMaterias) {
+//            System.out.println(materia);
+//        }
+        
+        Materia lengua = md.buscarmateria(2);
+        Inscripcion insc = new Inscripcion(rosario, lengua, 10);
+        //id.guardarInscripcion(insc);
+        id.actualizarNota(6, 3, 10);
+        id.borrarIncripcionMateriaaAlumno(7, 2);
+        
+        List<Alumno> inscAlumnos = id.obtenerAlumnosXMateria(1);
+        
+        System.out.println("Lista alumnos de matemáticas:");
+        for (Alumno alu : inscAlumnos) {
+            System.out.println(alu);
         }
-        ad.eliminarAlumno(6);
         
-        
-//        AlumnoData ad = new AlumnoData();
-//        MateriaData md= new MateriaData();
-//        InscripcionData id = new InscripcionData();
-        
+        List<Inscripcion> inscripciones = id.obtenerInscripciones();
+        System.out.println("Lista de todas las inscripciones:");
+        for (Inscripcion inscrip : inscripciones) {
+            System.out.println(inscrip);
+        }
         
     }
 

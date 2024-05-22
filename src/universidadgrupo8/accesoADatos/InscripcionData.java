@@ -48,7 +48,8 @@ public class InscripcionData {
     }
     public List<Inscripcion> obtenerInscripciones(){
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
-        String sql = "SELECT * FROM inscripciones";
+        String sql = "SELECT i.id_inscripciones, i.nota, i.id_alumnos, i.id_materia"
+                + " FROM inscripciones i, alumnos a WHERE i.id_alumnos = a.id_alumnos AND a.estado = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -122,7 +123,7 @@ public class InscripcionData {
      
      public void actualizarNota(int idAlumno,int idMateria,double nota){
      
-         String sql ="UPDATE incripciones SET nota = ? WHERE id_alumno = ? AND id_materia = ?";
+         String sql ="UPDATE inscripciones SET nota = ? WHERE id_alumnos = ? AND id_materia = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, nota);
@@ -131,11 +132,11 @@ public class InscripcionData {
             int filas =ps.executeUpdate();
             
             if(filas>0){
-                JOptionPane.showInternalMessageDialog(null, "Nota actualizada");
+                JOptionPane.showMessageDialog(null, "Nota actualizada");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showInternalMessageDialog(null, "Error a acceder a la tabla de inscripciones");
+            JOptionPane.showMessageDialog(null, "Error a acceder a la tabla de inscripciones");
         }
      
      
@@ -175,14 +176,14 @@ public class InscripcionData {
             
             int filas=ps.executeUpdate();
             if(filas>0){
-                JOptionPane.showInternalMessageDialog(null, "Inscripcion eliminada");
+                JOptionPane.showMessageDialog(null, "Inscripcion eliminada");
             
             }
             
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showInternalMessageDialog(null, "Error a acceder a la tabla de inscripciones");
+            JOptionPane.showMessageDialog(null, "Error a acceder a la tabla de inscripciones");
         }
      
      
@@ -211,7 +212,7 @@ public class InscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showInternalMessageDialog(null, "Error a acceder a la tabla de inscripciones");
+            JOptionPane.showMessageDialog(null, "Error a acceder a la tabla de inscripciones");
         }
         return alumnosMateria;
 }
