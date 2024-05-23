@@ -67,10 +67,31 @@ public class UnivercidadGrupo8 {
         
         List<Inscripcion> inscripciones = id.obtenerInscripciones();
         System.out.println("Lista de todas las inscripciones:");
-        for (Inscripcion inscrip : inscripciones) {
-            System.out.println(inscrip);
-        }
+            for (Inscripcion inscrip : inscripciones) {
+                System.out.println(inscrip);
+            }
         
+        System.out.println("Lista inscripciones de Gonzalo Gomez:");
+        List<Inscripcion> listaAlu = id.obtenerInscripcionesPorAlumno(5);
+            for (Inscripcion inscripcion : listaAlu) {
+                System.out.println(inscripcion);
+            }
+        
+        System.out.println("Lista de materias cursadas por Gonzalo Gomez:");
+        List<Materia> listaMateCur = id.obtenerMateriasCursadas(5);
+            for (Materia materia : listaMateCur) {
+                System.out.println(materia);
+            }
+        System.out.println("Lista de materias no cursadas por Gonzalo Gomez:");
+        List<Materia> listaMateNoCur= id.obtenerMateriasNOCursadas(5);
+            for (Materia materia : listaMateNoCur) {
+                System.out.println(materia);
+            }
+        System.out.println("Lista de alumnos de matemática:");
+        List<Alumno> listaAluxMate = id.obtenerAlumnosXMateria(1);
+            for (Alumno alumno : listaAluxMate) {
+                System.out.println(alumno);
+            }
     }
 
 }
