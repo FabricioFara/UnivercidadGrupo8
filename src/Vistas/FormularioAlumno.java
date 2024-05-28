@@ -5,15 +5,22 @@
  */
 package Vistas;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.zoneId;
+import javax.swing.JOptionPane;
+import universidadgrupo8.accesoADatos.AlumnoData;
+import universidadgrupo8.entidad.Alumno;
+
 /**
  *
  * @author Rocio
  */
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioAlumno
-     */
+    private AlumnoData aluData = new AlumnoData();
+    private Alumno alumnoActual= null;
     public FormularioAlumno() {
         initComponents();
     }
@@ -38,12 +45,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jtApellido = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
-        jrEstado = new javax.swing.JRadioButton();
-        jbNuevo = new javax.swing.JButton();
+        jtEstado = new javax.swing.JRadioButton();
+        jtNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jtFechaNac = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 153, 102));
 
@@ -84,10 +91,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jbNuevo.setText("Nuevo");
-        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+        jtNuevo.setText("Nuevo");
+        jtNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoActionPerformed(evt);
+                jtNuevoActionPerformed(evt);
             }
         });
 
@@ -120,7 +127,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                                         .addGap(22, 22, 22)))
                                 .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrEstado)
+                                    .addComponent(jtEstado)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -130,10 +137,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(22, 22, 22)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jbNuevo)
+                                .addComponent(jtNuevo)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbEliminar)
                                 .addGap(18, 18, 18)
@@ -165,15 +172,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtEstado, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNuevo)
+                    .addComponent(jtNuevo)
                     .addComponent(jbEliminar)
                     .addComponent(jbGuardar)
                     .addComponent(jbSalir))
@@ -188,20 +195,49 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtDocumentoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+        
+        try{
+        
+        Integer dni = Integer.parseInt(jbBuscar.getText());
+        alumnoActual = aluData.buscarAlumnoPorDni(dni);
+        if(alumnoActual!=null){
+        
+            jtApellido.setText(alumnoActual.getApellido());
+            jtNombre.setText(alumnoActual.getNombre());
+            jtEstado.setSelected(alumnoActual.isEstado());
+            LocalDate ld= alumnoActual.getFechaNac();
+            java.util.Date date = java.util.Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jtFechaNac.setDate(date);
+        }
+        
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
+            
+            
+        }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtApellidoActionPerformed
 
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbNuevoActionPerformed
-
+    private void jtNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNuevoActionPerformed
+        limpiarCampos();
+        alumnoActual = null;
+    }//GEN-LAST:event_jtNuevoActionPerformed
+    public void limpiarCampos(){
+        
+        jtDocumento.setText(" ");
+        jtApellido.setText(" ");
+        jtNombre.setText(" ");
+        jtEstado.setSelected(true);
+        jtFechaNac.setDate(new Date());
+        
+    
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -212,11 +248,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDocumento;
+    private javax.swing.JRadioButton jtEstado;
+    private com.toedter.calendar.JDateChooser jtFechaNac;
     private javax.swing.JTextField jtNombre;
+    private javax.swing.JButton jtNuevo;
     // End of variables declaration//GEN-END:variables
 }
