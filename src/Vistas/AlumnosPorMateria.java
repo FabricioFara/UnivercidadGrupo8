@@ -5,19 +5,32 @@
  */
 package Vistas;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import universidadgrupo8.accesoADatos.InscripcionData;
+import universidadgrupo8.accesoADatos.MateriaData;
+import universidadgrupo8.entidad.Alumno;
 import universidadgrupo8.entidad.Materia;
 
-/**
- *
- * @author Rocio
- */
-public class AlumnosPorMateria extends javax.swing.JInternalFrame {
 
+public class AlumnosPorMateria extends javax.swing.JInternalFrame {
+    
+    private ArrayList<Materia> listaM;
+    private MateriaData mData;
+    private InscripcionData inscData;
+    private ArrayList<Alumno> listaA;
+    private DefaultTableModel modelo;
     /**
      * Creates new form AlumnosPorMateria
      */
     public AlumnosPorMateria() {
         initComponents();
+        mData = new MateriaData();
+        inscData = new InscripcionData();
+        listaM = (ArrayList<Materia>) mData.listarMaterias();
+        modelo = new DefaultTableModel();
+        cargarMaterias();
+        armarCabeceraTabla();
     }
 
     /**
@@ -44,8 +57,12 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Seleccione una materia:");
 
-        jcMateria.setSelectedIndex(-1);
         jcMateria.setToolTipText("");
+        jcMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcMateriaItemStateChanged(evt);
+            }
+        });
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,6 +78,11 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,6 +126,14 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcMateriaItemStateChanged
+        cargarAlumnos();
+    }//GEN-LAST:event_jcMateriaItemStateChanged
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -113,4 +143,43 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Materia> jcMateria;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarMaterias() {
+        for (Materia it : listaM) {
+            jcMateria.addItem(it);
+        }
+    }
+    
+    private void borrarFilaTabla(){
+        int indice = modelo.getRowCount() - 1;
+        
+        for (int i = indice; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+    
+    private void cargarAlumnos(){
+        borrarFilaTabla();
+        Materia selec = (Materia)jcMateria.getSelectedItem();
+        listaA = (ArrayList<Alumno>)inscData.obtenerAlumnosXMateria(selec.getIdMateria());
+        for (Alumno alu : listaA) {
+            int id = alu.getIdAlumno();
+            int dni  = alu.getDni();
+            String apellido = alu.getApellido();
+            String nombre = alu.getNombre();
+            modelo.addRow(new Object[]{id, dni, apellido, nombre});
+        }
+        
+    }
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+         filaCabecera.add("ID");
+         filaCabecera.add("DNI");
+         filaCabecera.add("Apellido");
+         filaCabecera.add("Nombre");
+         for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+         }
+         jTabla.setModel(modelo);
+    }
 }
