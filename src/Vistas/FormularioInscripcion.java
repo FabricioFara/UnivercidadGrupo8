@@ -1,23 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import universidadgrupo8.accesoADatos.AlumnoData;
+import universidadgrupo8.accesoADatos.InscripcionData;
+import universidadgrupo8.accesoADatos.MateriaData;
 import universidadgrupo8.entidad.Alumno;
+import universidadgrupo8.entidad.Inscripcion;
+import universidadgrupo8.entidad.Materia;
 
-/**
- *
- * @author Rocio
- */
+
 public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
+    private List<Materia>listaM;
+    private List<Alumno> listaA;
+    private InscripcionData insData;
+    private MateriaData mData;
+    private AlumnoData aData;
+    private DefaultTableModel modelo;
     /**
      * Creates new form FormularioInscripcion
      */
     public FormularioInscripcion() {
         initComponents();
+        aData = new AlumnoData();
+    listaA = aData.listarAlumnos();
+    modelo = new DefaultTableModel();
+    insData = new InscripcionData();
+    mData = new MateriaData();
+    cargarAlumnos();
+    armarCabeceraTabla();
     }
 
     /**
@@ -50,14 +65,22 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
 
-        jcAlumnos.setSelectedIndex(-1);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
 
         jrMateriasInscriptas.setText("Materias inscriptas");
+        jrMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrMateriasInscriptasActionPerformed(evt);
+            }
+        });
 
         jrMateriasNoInscriptas.setText("Materias no inscriptas");
+        jrMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrMateriasNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,10 +96,25 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnular.setText("Anular Inscripción");
+        jbAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,6 +187,64 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jrMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriasInscriptasActionPerformed
+        borrarFilas();
+        cargaInscriptas();
+        jbAnular.setEnabled(true);
+        jbInscribir.setEnabled(false);
+        
+        if(jrMateriasInscriptas.isSelected()){
+            jrMateriasNoInscriptas.setSelected(false);
+        }
+    }//GEN-LAST:event_jrMateriasInscriptasActionPerformed
+
+    private void jrMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMateriasNoInscriptasActionPerformed
+        borrarFilas();
+        cargarNoIncriptas();
+        jbInscribir.setEnabled(true);
+        jbAnular.setEnabled(false);
+        
+        if(jrMateriasNoInscriptas.isSelected()){
+            jrMateriasInscriptas.setSelected(false);
+        }
+    }//GEN-LAST:event_jrMateriasNoInscriptasActionPerformed
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        int filaSeleccionada = jTabla.getSelectedRow();
+        if(filaSeleccionada != -1){
+            Alumno a = (Alumno)jcAlumnos.getSelectedItem();
+            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
+            String nombreMateria = (String)modelo.getValueAt            (filaSeleccionada,1);
+            int anio = (Integer)modelo.getValueAt(filaSeleccionada,2);
+            Materia m = new Materia(idMateria,nombreMateria,anio,true);
+            Inscripcion i = new Inscripcion(a,m,0);
+            insData.guardarInscripcion(i);
+            borrarFilas();
+            jrMateriasNoInscriptas.setSelected(false);
+            jrMateriasInscriptas.setSelected(false);
+        }else{
+            JOptionPane.showMessageDialog(null,"Usted debe seleccionar una fila de la tabla");
+        }
+    }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
+        int filaSeleccionada = jTabla.getSelectedRow();
+        if(filaSeleccionada != -1){
+            Alumno a = (Alumno)jcAlumnos.getSelectedItem();
+            int idMateria = (Integer)modelo.getValueAt(filaSeleccionada, 0);
+            insData.borrarIncripcionMateriaaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilas();
+            jrMateriasNoInscriptas.setSelected(false);
+            jrMateriasInscriptas.setSelected(false);
+        }else{
+            JOptionPane.showMessageDialog(null,"Usted debe seleccionar una fila de la tabla");
+        }
+    }//GEN-LAST:event_jbAnularActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -164,4 +260,44 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrMateriasInscriptas;
     private javax.swing.JRadioButton jrMateriasNoInscriptas;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarAlumnos() {
+        for(Alumno a : listaA){
+            jcAlumnos.addItem(a);
+        }
+    }
+
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("ID");
+        filaCabecera.add("Nombre");
+        filaCabecera.add("Año");
+        for(Object o : filaCabecera){
+            modelo.addColumn(o);
+        }
+        jTabla.setModel(modelo);
+    }
+    
+        private void borrarFilas(){
+        int i = modelo.getRowCount() -1;
+        for(int x = i ; x>=0 ; x--){
+            modelo.removeRow(x);
+        }
+    }
+    
+    private void cargarNoIncriptas(){
+        Alumno selec = (Alumno)jcAlumnos.getSelectedItem();
+        listaM = insData.obtenerMateriasNOCursadas(selec.getIdAlumno());
+        for(Materia m : listaM){
+            modelo.addRow(new Object[] {(m.getIdMateria()) , (m.getNombre()) , (m.getAño())});
+        }
+    }
+    
+    private void cargaInscriptas(){
+         Alumno selec = (Alumno)jcAlumnos.getSelectedItem();
+         List<Materia> lista = insData.obtenerMateriasCursadas(selec.getIdAlumno());
+         for(Materia m : lista){
+             modelo.addRow(new Object[]{(m.getIdMateria()),(m.getNombre()),(m.getAño())});
+         }
+    }
 }
