@@ -234,6 +234,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void jtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtApellidoActionPerformed
         
+        
+    }//GEN-LAST:event_jtApellidoActionPerformed
+
+    private void jtNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNuevoActionPerformed
+        limpiarCampos();
+        alumnoActual = null;
+    }//GEN-LAST:event_jtNuevoActionPerformed
+
+    private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
         try{
         Integer dni = Integer.parseInt(jbBuscar.getText());
         String apellido=jtApellido.getText();
@@ -266,15 +275,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
             
             }
-    }//GEN-LAST:event_jtApellidoActionPerformed
-
-    private void jtNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNuevoActionPerformed
-        limpiarCampos();
-        alumnoActual = null;
-    }//GEN-LAST:event_jtNuevoActionPerformed
-
-    private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
-        
     }//GEN-LAST:event_jtGuardarActionPerformed
 
     private void jtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEliminarActionPerformed
@@ -298,7 +298,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         jtApellido.setText(" ");
         jtNombre.setText(" ");
         jtEstado.setSelected(true);
-        jtFechaNac.setDate(new Date());
+        jtFechaNac.setDate(new java.util.Date());
         
     
     
