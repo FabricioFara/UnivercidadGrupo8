@@ -106,6 +106,11 @@ public class Menú extends javax.swing.JFrame {
         jmAlumnosMateria.setText("Consultas");
 
         jmAluxMateria.setText("Alumnos por Materia");
+        jmAluxMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAluxMateriaActionPerformed(evt);
+            }
+        });
         jmAlumnosMateria.add(jmAluxMateria);
 
         jMenuBar1.add(jmAlumnosMateria);
@@ -180,6 +185,17 @@ public class Menú extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(note); 
         
     }//GEN-LAST:event_jmManipulacionNotasActionPerformed
+
+    private void jmAluxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAluxMateriaActionPerformed
+        
+          jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        AlumnosPorMateria note=new AlumnosPorMateria();
+        note.setVisible(true);
+        jDesktopPane1.add(note);
+        jDesktopPane1.moveToFront(note); 
+        
+    }//GEN-LAST:event_jmAluxMateriaActionPerformed
 
     /**
      * @param args the command line arguments
