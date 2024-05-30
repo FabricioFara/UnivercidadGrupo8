@@ -35,10 +35,10 @@ public class Menú extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jmFormMateria = new javax.swing.JMenuItem();
         jmManejoInscripciones = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmInscripciones = new javax.swing.JMenuItem();
         jmManipulacionNotas = new javax.swing.JMenuItem();
         jmAlumnosMateria = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jmAluxMateria = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,8 +75,8 @@ public class Menú extends javax.swing.JFrame {
 
         jmManejoInscripciones.setText("Administración");
 
-        jMenuItem3.setText("Manejo de Inscripciones");
-        jmManejoInscripciones.add(jMenuItem3);
+        jmInscripciones.setText("Manejo de Inscripciones");
+        jmManejoInscripciones.add(jmInscripciones);
 
         jmManipulacionNotas.setText("Manipulación de notas");
         jmManejoInscripciones.add(jmManipulacionNotas);
@@ -85,8 +85,8 @@ public class Menú extends javax.swing.JFrame {
 
         jmAlumnosMateria.setText("Consultas");
 
-        jMenuItem5.setText("Alumnos por Materia");
-        jmAlumnosMateria.add(jMenuItem5);
+        jmAluxMateria.setText("Alumnos por Materia");
+        jmAlumnosMateria.add(jmAluxMateria);
 
         jMenuBar1.add(jmAlumnosMateria);
 
@@ -155,11 +155,11 @@ public class Menú extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmAlumnosMateria;
+    private javax.swing.JMenuItem jmAluxMateria;
     private javax.swing.JMenuItem jmFormAlumno;
     private javax.swing.JMenuItem jmFormMateria;
+    private javax.swing.JMenuItem jmInscripciones;
     private javax.swing.JMenu jmManejoInscripciones;
     private javax.swing.JMenuItem jmManipulacionNotas;
     // End of variables declaration//GEN-END:variables
