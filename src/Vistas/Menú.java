@@ -55,6 +55,11 @@ public class Menú extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Alumno");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jmFormAlumno.setText("Formulario de Alumno");
         jmFormAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +74,11 @@ public class Menú extends javax.swing.JFrame {
         jMenu2.setText("Materia");
 
         jmFormMateria.setText("Formulario de Materia");
+        jmFormMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormMateriaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmFormMateria);
 
         jMenuBar1.add(jMenu2);
@@ -76,9 +86,19 @@ public class Menú extends javax.swing.JFrame {
         jmManejoInscripciones.setText("Administración");
 
         jmInscripciones.setText("Manejo de Inscripciones");
+        jmInscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmInscripcionesActionPerformed(evt);
+            }
+        });
         jmManejoInscripciones.add(jmInscripciones);
 
         jmManipulacionNotas.setText("Manipulación de notas");
+        jmManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManipulacionNotasActionPerformed(evt);
+            }
+        });
         jmManejoInscripciones.add(jmManipulacionNotas);
 
         jMenuBar1.add(jmManejoInscripciones);
@@ -110,8 +130,56 @@ public class Menú extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmFormAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormAlumnoActionPerformed
-        // TODO add your handling code here:
+        
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        FormularioAlumno alu=new FormularioAlumno();
+        alu.setVisible(true);
+        jDesktopPane1.add(alu);
+        jDesktopPane1.moveToFront(alu);  
+        
     }//GEN-LAST:event_jmFormAlumnoActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+
+          
+        
+        
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jmFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMateriaActionPerformed
+         
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        FormularioMateria alu=new FormularioMateria();
+        alu.setVisible(true);
+        jDesktopPane1.add(alu);
+        jDesktopPane1.moveToFront(alu);  
+        
+    }//GEN-LAST:event_jmFormMateriaActionPerformed
+
+    private void jmInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscripcionesActionPerformed
+        
+         jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        FormularioInscripcion alu=new FormularioInscripcion();
+        alu.setVisible(true);
+        jDesktopPane1.add(alu);
+        jDesktopPane1.moveToFront(alu);  
+        
+    }//GEN-LAST:event_jmInscripcionesActionPerformed
+
+    private void jmManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManipulacionNotasActionPerformed
+        
+         jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        FormularioNotas note=new FormularioNotas();
+        note.setVisible(true);
+        jDesktopPane1.add(note);
+        jDesktopPane1.moveToFront(note); 
+        
+    }//GEN-LAST:event_jmManipulacionNotasActionPerformed
 
     /**
      * @param args the command line arguments

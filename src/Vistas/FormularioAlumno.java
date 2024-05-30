@@ -211,9 +211,10 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         
+        int dni;
         try{
         
-        Integer dni = Integer.parseInt(jbBuscar.getText());
+         dni = Integer.parseInt(jtDocumento.getText());
         alumnoActual = aluData.buscarAlumnoPorDni(dni);
         if(alumnoActual!=null){
         
@@ -227,6 +228,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
+            ex.printStackTrace();
             
             
         }
@@ -244,7 +246,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
         try{
-        Integer dni = Integer.parseInt(jbBuscar.getText());
+        Integer dni = Integer.parseInt(jtDocumento.getText());
         String apellido=jtApellido.getText();
         String nombre=jtNombre.getText();
         if(apellido.isEmpty()|| nombre.isEmpty() ){

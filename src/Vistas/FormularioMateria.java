@@ -189,13 +189,16 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try { 
-            Integer Codigo=Integer.parseInt(jbBuscar.getText());
+            Integer Codigo=Integer.parseInt(jtCodigo.getText());
            
             matActual=matData.buscarmateria(Codigo);
             if(matActual!=null) {
                 jtNombre.setText(matActual.getNombre());
                 jtAnio.setText(String.valueOf(matActual.getAño()));
                 jrEstado.setSelected(matActual.isEstado());
+                jbEliminar.setEnabled(true);
+                jbNuevo.setEnabled(true);
+                
                 
                
                         
@@ -212,6 +215,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
        limpiarCampo();
        matActual=null;
+       jbEliminar.setEnabled(false);
+       jbNuevo.setEnabled(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -226,7 +231,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
        try {
-           Integer codigo=Integer.parseInt(jbGuardar.getText());
+           Integer codigo=Integer.parseInt(jtCodigo.getText());
            String nombre=jtNombre.getText();
            Integer anio=Integer.parseInt(jtAnio.getText());
            if(nombre.isEmpty() || anio==null ){
