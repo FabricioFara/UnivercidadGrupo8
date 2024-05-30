@@ -73,7 +73,8 @@ public class InscripcionData {
      
      public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno){
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
-        String sql = "SELECT * FROM inscripciones WHERE id_alumnos = ?";
+        String sql = "SELECT i.id_inscripciones, i.id_alumnos, i.id_materia, nota FROM inscripciones i, materia m"
+                + " WHERE id_alumnos = ? AND i.id_materia = m.id_materia AND m.estado = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
